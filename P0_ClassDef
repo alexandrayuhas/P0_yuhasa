@@ -7,7 +7,7 @@
 # Purpose: This file creates a class called Decrypt which is used to decrypt encrypted ciphers.
 ######################################################################
 # Acknowledgements: Dr. Scott Heggen for a lot of help.
-#
+# https://www.quora.com/How-do-I-count-the-frequency-of-different-letters-that-are-in-a-text-file-python-and-display-the-amount-on-a-list
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -48,26 +48,29 @@ class Decrypt:
         f.close()
         print("File exported to " + filename)
 
+    def counting_frequency(self, cipher):
+        d = {}
+        for letter in cipher:
+            d[letter] = d.get(letter, 0) + 1
+        max = 0
+        for k in d:
+            if d[k] > max:
+                max = d[k]
+                print(max)
+                return max
 
-    def most_common(self, cipher, alphabet, new_letter):
-        for letter in alphabet:
-            if letter in cipher:
-                num_letter = #number of times letter shows up.
-            elif letter not in cipher:
-                num_letter = 0
-            if num_letter > #all other num_letters:
-                cipher.replace(letter, new_letter)
-            else:
-                pass
 
-
-    def two_starting(self):
+    def two_starting(self, cipher, starting_letter, new_letter):
+        # The goal of this method is to scan the file and find two letter words starting with a specific letter and
+        # replace the second letter with new_letter
         pass
 
-    def two_ending(self):
+    def two_ending(self, cipher, ending_letter, new_letter):
+        # The goal of this method is to scan the file and find two letter words ending with a specific letter and
+        # replace the first letter with new_letter
         pass
 
-    def four_ending(self):
+    def four_ending(self, cipher, ending_letters, new_letter):
         pass
 
     def three_starting_ending(self):
@@ -82,5 +85,11 @@ class Decrypt:
     def twice_in_row(self):
         pass
 
+def main():
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    cipher0 = Decrypt("cipher_to_friend_1.txt")
+    cipher0.counting_frequency(cipher0)
+
+main()
 
 
