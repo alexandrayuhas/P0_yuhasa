@@ -49,8 +49,17 @@ class Decrypt:
         print("File exported to " + filename)
 
 
-    def most_common(self):
-        pass
+    def most_common(self, cipher, alphabet, new_letter):
+        for letter in alphabet:
+            if letter in cipher:
+                num_letter = #number of times letter shows up.
+            elif letter not in cipher:
+                num_letter = 0
+            if num_letter > #all other num_letters:
+                cipher.replace(letter, new_letter)
+            else:
+                pass
+
 
     def two_starting(self):
         pass
