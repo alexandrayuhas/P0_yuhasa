@@ -71,16 +71,12 @@ class Decrypt:
         for letter in cipher:
             if letter in d:
                 d[letter] = d.get(letter, 0) + 1
-        ETAOIN = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'
         letter_freq = {}
         for letter in alphabet:
             if d.get(letter, 0) not in letter_freq:
                 letter_freq[d[letter]] = [letter]
             else:
                 letter_freq[d[letter]].append(letter)
-        for freq in letter_freq:
-            letter_freq[freq].sort(key=ETAOIN.find, reverse=True)
-            letter_freq[freq] = ''.join(letter_freq[freq])
         freq_tuples = list(letter_freq.items())
         freq_tuples.sort()
         self.message = copy.deepcopy(self.cipher)
