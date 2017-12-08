@@ -24,10 +24,13 @@
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
-import copy
-import time
+import copy   # I need to make a deepcopy later in the program, so I had to import copy
+import time   # I used the sleep function so I had to import time.
 
 class Decrypt:
+    """
+    This begins the class definition for my new class, Decrypt.
+    """
 
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -37,7 +40,7 @@ class Decrypt:
 
         :param input_file: The file to be decrypted
         """
-        self.input_file = input_file                         # The file to be encrypted or decrypted                          # Either "encrypt" or "decrypt"
+        self.input_file = input_file                         # The file to be decrypted
         self.cipher = ""                                     # A placeholder for the cipher
         self.import_file()                                   # This calls the import_file method
         self.message = ""
@@ -65,28 +68,36 @@ class Decrypt:
         print("File exported to " + filename)
 
     def frequency(self, cipher, alphabet):
+        """
+        Takes a cipher, performs frequency analysis to decrypt cipher, returns decrypted message.
+        :param cipher: the encrypted file
+        :param alphabet: the alphabet so we can interate through it
+        :return: None
+        """
+
         d = {}
-        for letter in alphabet:
+        for letter in alphabet:   # This for loop takes every letter in the alphabet and puts it into the dictionary with a value of 0.
             d[letter] = 0
-        for letter in cipher:
+        for letter in cipher:     # This for loop then iterates through the cipher and if the letter is in the cipher, it changes the value in the dictionary to the number of times the letter shows up in the cipher.
             if letter in d:
                 d[letter] = d.get(letter, 0) + 1
         letter_freq = {}
-        for letter in alphabet:
+        for letter in alphabet:   # This for loop adds the letters that are in and not in the cipher to this new dictionary
             if d.get(letter, 0) not in letter_freq:
                 letter_freq[d[letter]] = [letter]
             else:
                 letter_freq[d[letter]].append(letter)
-        freq_tuples = list(letter_freq.items())
-        freq_tuples.sort()
+        freq_tuples = list(letter_freq.items()) # Then we create a list of tuples of the frequencies and letters, so we can see which letters go with which frequencies.
+        freq_tuples.sort()  # This sorts the list so that we can see it from least to greatest so we can see which letters appear the most often.
         self.message = copy.deepcopy(self.cipher)
         S = {'S':'e', 'H':'t', 'C':'o', 'O':'a', 'W':'i', 'B':'n','G':'s', 'V':'h', 'F':'r', 'Z':'l','Q':'c','I':'u','R':'d', 'T':'f', 'D':'p', 'A':'m','M':'y','K':'w','U':'g','J':'v','P':'b','Y':'k','L':'x','E':'q','X':'j'}
-        for letter in S:
+        # The dictionary S takes the old letters (uppercase) that appear the most often and pairs them with the new letters (lowercase) that are supposed to appear the most often in the English language
+        for letter in S:  # This for loop iterates through S and replaces all the old letters with the new letters in self.message (a copy of the cipher).
             self.message = self.message.replace(letter, S[letter])
         time.sleep(3)
         print("If my analysis is correct (we'll just assume it is, because I am a genuis computer), Caesar's message should read something like this:")
         print()
-        print(self.message)
+        print(self.message) # This prints the now decrypted message.
 
 
 
